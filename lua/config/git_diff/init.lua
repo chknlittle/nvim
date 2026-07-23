@@ -98,6 +98,10 @@ local function refresh_panel(state)
     for _, f in ipairs(untracked) do
       if f ~= "" then
         local abs_path = util.path_join(repo_root, f)
+        local st = uv.fs_stat(abs_path)
+        if not st or st.type ~= "file" then
+          goto continue
+        end
         local entry
 
         local fh = io.open(abs_path, "r")
@@ -120,6 +124,7 @@ local function refresh_panel(state)
 
         tree.insert(repo_tree, util.split_path_components(f), entry)
       end
+      ::continue::
     end
 
     if next(repo_tree) ~= nil then
@@ -379,7 +384,7 @@ function M.open()
   tree_api.tree.close()
   tree_api.tree.open({ current_window = true })
   state.tree_buf = vim.api.nvim_get_current_buf()
-
+ 
   -- Move to panel window
   vim.cmd("wincmd k")
   state.panel_buf = vim.api.nvim_get_current_buf()

@@ -1,8 +1,13 @@
-local diff_panel = require("config.git_diff")
-
 return {
   "tpope/vim-fugitive",
-  config = function()
-    vim.keymap.set("n", "<leader>gd", diff_panel.open, { noremap = true, silent = true })
-  end,
+  cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit", "Gwrite", "Gread", "Ggrep" },
+  keys = {
+    {
+      "<leader>gd",
+      function()
+        require("config.git_diff").open()
+      end,
+      desc = "Open Git diff panel",
+    },
+  },
 }

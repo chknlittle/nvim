@@ -122,8 +122,18 @@ end
 
 --- Count lines in a file using pure Lua (no shell-out).
 function M.count_lines(path)
+  local st = uv.fs_stat(path)
+  if not st or st.type ~= "file" then return 0 end
+
+  local fh = io.open(path, "r")
+  if not fh then return 0 end
+
   local count = 0
-  for _ in io.lines(path) do count = count + 1 end
+  for _ in fh:lines() do
+    count = count + 1
+  end
+  fh:close()
+
   return count
 end
 

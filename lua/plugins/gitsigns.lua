@@ -1,5 +1,13 @@
 return {
   "lewis6991/gitsigns.nvim",
+  event = { "BufReadPost", "BufNewFile" },
+  keys = {
+    { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview hunk" },
+    { "<leader>gu", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset hunk" },
+    { "<leader>gU", "<cmd>Gitsigns reset_buffer<cr>", desc = "Reset buffer" },
+    { "<leader>gn", "<cmd>Gitsigns next_hunk<cr>", desc = "Next hunk" },
+    { "<leader>gN", "<cmd>Gitsigns prev_hunk<cr>", desc = "Previous hunk" },
+  },
   config = function()
     require("gitsigns").setup({
       signs = {
@@ -10,12 +18,5 @@ return {
         changedelete = { text = "~" },
       },
     })
-
-    local opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", opts)
-    vim.keymap.set("n", "<leader>gu", ":Gitsigns reset_hunk<CR>", opts)
-    vim.keymap.set("n", "<leader>gU", ":Gitsigns reset_buffer<CR>", opts)
-    vim.keymap.set("n", "<leader>gn", ":Gitsigns next_hunk<CR>", opts)
-    vim.keymap.set("n", "<leader>gN", ":Gitsigns prev_hunk<CR>", opts)
   end,
 }
