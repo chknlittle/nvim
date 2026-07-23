@@ -1,4 +1,5 @@
 return {
+  require("plugins.tokyonight"),
   require("plugins.telescope"),
   require("plugins.nvimtree"),
   require("plugins.gitsigns"),
@@ -10,5 +11,5 @@ return {
   require("plugins.lspconfig"),
   require("plugins.cmp"),
   require("plugins.toggleterm"),
-  { "leafgarland/typescript-vim" },
+  require("plugins.treesitter"),
 }

@@ -1,11 +1,11 @@
 return {
   "bfrg/vim-cuda-syntax",
-  config = function()
-    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-      pattern = "*.ptx",
-      callback = function()
-        vim.bo.filetype = "cuda"
-      end,
+  ft = { "cuda", "ptx" },
+  init = function()
+    vim.filetype.add({
+      extension = {
+        ptx = "ptx",
+      },
     })
   end,
 }
